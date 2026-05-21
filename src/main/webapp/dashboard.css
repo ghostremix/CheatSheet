@@ -1,0 +1,616 @@
+:root {
+	--bg: #0b0f1a;
+	--header-bg: #161b2a;
+	--card-bg: #1f2937;
+	--accent: #3b82f6;
+	--accent-hover: #2563eb;
+	--text: #f3f4f6;
+	--text-dim: #9ca3af;
+	--border: #374151;
+	--danger: #ef4444;
+	--success: #10b981;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	background: var(--bg);
+	color: var(--text);
+	font-family: 'Inter', sans-serif;
+	line-height: 1.6;
+}
+
+/* --- Header Section --- */
+.main-header {
+	background: var(--header-bg);
+	height: 70px;
+	display: flex;
+	align-items: center;
+	border-bottom: 1px solid var(--border);
+	position: sticky;
+	top: 0;
+	z-index: 1000;
+}
+
+.header-content {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 0 20px;
+}
+
+.brand {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	font-size: 1.5rem;
+	font-weight: 800;
+	color: var(--accent);
+	cursor: pointer;
+}
+
+.header-right {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+}
+
+/* --- Toggle Switch --- */
+.mode-switch-container {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	background: rgba(255, 255, 255, 0.05);
+	padding: 5px 12px;
+	border-radius: 20px;
+}
+
+.switch {
+	position: relative;
+	width: 38px;
+	height: 20px;
+}
+
+.switch input {
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+
+.slider {
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: #4b5563;
+	transition: .3s;
+	border-radius: 20px;
+}
+
+.slider:before {
+	position: absolute;
+	content: "";
+	height: 14px;
+	width: 14px;
+	left: 3px;
+	bottom: 3px;
+	background: white;
+	transition: .3s;
+	border-radius: 50%;
+}
+
+input:checked+.slider {
+	background: var(--success);
+}
+
+input:checked+.slider:before {
+	transform: translateX(18px);
+}
+
+/* --- Main Content Layout --- */
+.main-container, #snippetsView {
+	max-width: 1200px; /* အကျယ်ဆုံးရှိရမယ့် ပမာဏ */
+	margin: 40px auto;
+	/* auto က ဘယ်ညာကို အလယ်ရောက်စေပြီး 40px က အပေါ်ကနေ ခွာပေးတယ် */
+	padding: 0 25px; /* Screen သေးတဲ့အခါ ဘေးကပ်မသွားအောင် */
+}
+
+.title-section {
+	margin-bottom: 50px;
+}
+
+.title-header {
+	display: inline-flex; /* Content ရှိသလောက်ပဲ Width ယူမယ် */
+	align-items: center;
+	gap: 15px;
+	margin-bottom: 25px;
+	padding-bottom: 12px;
+	position: relative; /* Underline အတွက် position base ယူတာ */
+}
+
+.title-header::after {
+	content: "";
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 100%; /* Title + Buttons အားလုံးရဲ့ အရှည်အတိုင်း */
+	height: 2px;
+	background: var(--accent);
+	border-radius: 2px;
+}
+
+.title-header h2 {
+	font-size: 1.4rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	margin: 0;
+}
+
+.admin-actions {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+}
+
+/* --- Category Pills --- */
+.pill-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+	gap: 15px;
+}
+
+.cat-pill {
+	background: var(--card-bg);
+	padding: 14px 18px;
+	border-radius: 12px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border: 1px solid var(--border);
+	cursor: pointer;
+	transition: 0.3s;
+}
+
+.cat-pill:hover {
+	border-color: var(--accent);
+	background: rgba(59, 130, 246, 0.08);
+	transform: translateY(-3px);
+}
+
+.cat-pill .admin-actions .action-btn {
+	width: 28px;
+	height: 28px;
+	font-size: 12px;
+	background: #00000030; /* Card ထဲမှာဆိုတော့ နည်းနည်း ပိုမှောင်ထားမယ် */
+}
+
+.pill-info {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	font-weight: 500;
+}
+
+.pill-info i {
+	color: var(--accent);
+}
+
+/* --- Snippet View Styling --- */
+.view-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 15px 0; /* အတွင်း Padding ထက် အောက်ခြေမျဉ်းနဲ့ ပိုဆိုင်တယ် */
+	margin-bottom: 30px;
+	border-bottom: 1px solid var(--border);
+	/* Header ရဲ့ အောက်မှာ မျဉ်းတားတာ */
+}
+
+.view-header-left {
+	display: flex;
+	align-items: center;
+	gap: 20px;
+}
+
+#selectedCatName {
+	font-size: 1.4rem;
+	font-weight: 700;
+	color: var(--text);
+	margin: 0;
+	flex-grow: 1; /* နာမည်ကို အလယ်မှာ နေရာပိုပေးမယ် */
+}
+
+.selected-cat-title {
+	flex-grow: 1;
+	font-size: 1.4rem;
+	font-weight: 700;
+}
+
+.add-snippet-btn {
+	background: var(--accent);
+	color: white;
+	border: none;
+	padding: 10px 18px;
+	border-radius: 8px;
+	font-weight: 600;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	transition: 0.2s;
+}
+
+.add-snippet-btn:hover {
+	background: var(--accent-hover);
+}
+
+/* --- Snippet Cards --- */
+.snippets-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+	/* Card ကို နည်းနည်း ပိုကျယ်စေချင်လို့ */
+	gap: 20px;
+	align-items: stretch;
+}
+
+.snippet-card {
+	background: var(--card-bg);
+	border: 1px solid var(--border);
+	border-radius: 8px;
+	overflow: hidden; /* အတွင်းက header နဲ့ ညီအောင် */
+	display: flex;
+	flex-direction: column;
+	transition: transform 0.2s;
+	height: 100%;
+	padding: 16px;
+	box-sizing: border-box;
+}
+
+.snippet-card:hover {
+	transform: translateY(-5px);
+	border-color: var(--accent);
+}
+
+.snippet-top {
+	padding: 12px 20px;
+	background: rgba(255, 255, 255, 0.03);
+	border-bottom: 1px solid var(--border);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 14px;
+}
+
+.snippet-top h4 {
+	font-size: 1rem;
+	color: var(--accent);
+}
+
+.snippet-card pre {
+	margin: 0;
+	padding: 16px;
+	background: #0d1117;
+	border-radius: 8px;
+	font-size: 13px;
+	max-height: 300px;
+	/* စာတွေ အပြင်လျှံမထွက်အောင်နဲ့ scroll bar ပေါ်အောင် ဒါတွေထည့်ပါ */
+	overflow-x: auto;
+	/* ဘယ်ညာ စာရှည်ရင် အမဲဘောင်ထဲမှာပဲ scroll bar ပေါ်မယ် */
+	overflow-y: auto; /* အပေါ်အောက် ရှည်ရင်လည်း ဘောင်ထဲမှာပဲ scroll မယ် */
+	white-space: pre; /* ကုဒ်တွေရဲ့ format အတိုင်း အတိအကျပြမယ် */
+	word-wrap: normal; /* စာလုံးတွေကို အတင်းဖြတ်မချပစ်ဘူး */
+	/* စာနည်းရင်တောင် ဘောင်အပြည့် ပေါ်စေမည့် အဓိက ကုဒ် ၂ လိုင်း */
+	width: 100%;
+	display: block;
+	flex-grow: 1;
+	height: 100%;
+	box-sizing: border-box;
+}
+
+.snippet-card code {
+	font-family: 'Fira Code', 'Consolas', monospace;
+	color: #7dd3fc;
+	font-size: 0.95rem;
+	display: block;
+	/* scroll bar ကောင်းကောင်းအလုပ်လုပ်ဖို့ block ပြောင်းပေးရပါမယ် */
+}
+
+/* အတွင်းက code tag ကိုလည်း block ဆန့်ထုတ်ပေးခြင်း */
+.snippet-card pre code {
+	display: block;
+	width: 100%;
+	white-space: pre-wrap;
+	/* စာသားအရှည်ကြီးတွေကို ဘောင်ကျော်မသွားဘဲ အလိုအလျောက် အောက်ဆင်းပေးရန် */
+	word-break: break-all;
+	font-family: 'Courier New', Courier, monospace;
+}
+
+/* --- Scrollbar လေးကို ပိုလှအောင် format လုပ်ခြင်း (Optional) --- */
+.snippet-card pre::-webkit-scrollbar {
+	height: 6px; /* ဘယ်ညာ scroll bar အထူ */
+	width: 6px; /* အပေါ်အောက် scroll bar အထူ */
+}
+
+.snippet-card pre::-webkit-scrollbar-track {
+	background: #0d1117;
+	/* scroll bar အောက်ခံအရောင်ကို အမဲဘောင်နဲ့ တစ်သားတည်းထားမယ် */
+}
+
+.snippet-card pre::-webkit-scrollbar-thumb {
+	background: #2563eb; /* scroll bar အတုံးလေးရဲ့ အရောင် (Blue) */
+	border-radius: 4px;
+}
+
+.snippet-card pre::-webkit-scrollbar-thumb:hover {
+	background: #3b82f6; /* hover လုပ်ရင် ပိုလင်းသွားမယ် */
+}
+
+#snippetsView:not(.hidden) {
+	display: block !important;
+}
+
+#snippetsContainer {
+	display: grid !important; /* ပျောက်မနေစေရန် */
+}
+
+/* --- Buttons & Icons --- */
+.action-btn {
+	width: 32px;
+	height: 32px;
+	background: #ffffff10; /* နည်းနည်းလင်းစေချင်လို့ */
+	border: 1px solid var(--border);
+	color: var(--text);
+	border-radius: 6px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+	transition: 0.2s ease;
+}
+
+.action-btn:hover {
+	background: var(--accent);
+	border-color: var(--accent);
+	color: white;
+}
+
+.action-btn.delete:hover {
+	background: var(--danger);
+	border-color: var(--danger);
+}
+
+.icon-btn {
+	background: none;
+	border: none;
+	color: var(--text-dim);
+	font-size: 1.1rem;
+	cursor: pointer;
+	padding: 5px;
+	transition: 0.2s;
+}
+
+.icon-btn:hover {
+	color: var(--accent);
+}
+
+/* --- Utils --- */
+.hidden {
+	display: none !important;
+}
+
+.text-red {
+	color: var(--danger) !important;
+}
+
+.empty {
+	padding: 50px;
+	text-align: center;
+	color: var(--text-dim);
+	background: var(--card-bg);
+	border-radius: 12px;
+	border: 1px dashed var(--border);
+}
+
+.back-btn {
+	background: rgba(255, 255, 255, 0.05);
+	color: var(--text-dim);
+	border: 1px solid var(--border);
+	padding: 8px 16px;
+	border-radius: 8px;
+	font-size: 14px;
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	transition: 0.3s ease;
+}
+
+.back-btn:hover {
+	background: var(--accent);
+	color: white;
+	border-color: var(--accent);
+}
+
+/* --- Global Search Bar Design --- */
+.search-container {
+	position: relative;
+	width: 40%;
+	margin: 0 20px;
+}
+
+.search-box {
+	display: flex;
+	align-items: center;
+	background: #1f2937;
+	border: 1px solid #374151;
+	border-radius: 8px;
+	padding: 8px 14px;
+	transition: all 0.3s ease;
+}
+
+.search-box:focus-within {
+	border-color: #2563eb;
+	box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+}
+
+.search-icon {
+	color: #9ca3af;
+	margin-right: 10px;
+	font-size: 14px;
+}
+
+#globalSearch {
+	background: transparent;
+	border: none;
+	outline: none;
+	color: #f3f4f6;
+	width: 100%;
+	font-size: 14px;
+	font-family: 'Inter', sans-serif;
+}
+
+/* --- Dropdown List Options --- */
+.search-dropdown {
+	position: absolute;
+	top: 110%;
+	left: 0;
+	width: 100%;
+	background: #111827;
+	border: 1px solid #374151;
+	border-radius: 8px;
+	max-height: 350px;
+	overflow-y: auto;
+	z-index: 1000;
+	box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+}
+
+.search-item {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 12px 16px;
+	border-bottom: 1px solid #1f2937;
+	cursor: pointer;
+	transition: background 0.2s;
+}
+
+.search-item:last-child {
+	border-bottom: none;
+}
+
+.search-item:hover {
+	background: #1f2937;
+}
+
+.search-item .item-title {
+	color: #e5e7eb;
+	font-weight: 600;
+	font-size: 14px;
+}
+
+.search-item .item-badge {
+	background: #2563eb;
+	color: #ffffff;
+	font-size: 11px;
+	padding: 3px 8px;
+	border-radius: 20px;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+/* --- Premium Animated Logout Button --- */
+.Btn {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	width: 40px;
+	/* Header နှင့် ကိုက်ညီအောင် အရွယ်အစား အနည်းငယ် ညှိထားပါသည် */
+	height: 40px;
+	border: none;
+	border-radius: 50%;
+	cursor: pointer;
+	position: relative;
+	overflow: hidden;
+	transition-duration: .3s;
+	box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+	background-color: var(--danger);
+	/* နဂိုနီရဲရဲအစား Dashboard က သတ်မှတ်ထားတဲ့ အနီရောင်ကို သုံးစွဲခြင်း */
+}
+
+/* Slide ထွက်လာမည့် SVG Icon နေရာ */
+.sign {
+	width: 100%;
+	transition-duration: .3s;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.sign svg {
+	width: 16px;
+}
+
+.sign svg path {
+	fill: var(--text); /* အဖြူရောင်စာသား */
+}
+
+/* Logout စာသား နေရာ */
+.text {
+	position: absolute;
+	right: 0%;
+	width: 0%;
+	opacity: 0;
+	color: var(--text);
+	font-size: 0.95rem;
+	/* Font ကို Dashboard နှင့် လိုက်ဖက်အောင် ညှိခြင်း */
+	font-weight: 600;
+	transition-duration: .3s;
+	font-family: 'Inter', sans-serif;
+}
+
+/* Hover ဖြစ်သွားချိန် ခလုတ်ဘေးတိုက် ဆွဲဆန့်မည့် Effect */
+/* .Btn:hover {
+	width: 115px;
+	border-radius: 40px;
+	transition-duration: .3s;
+} */
+
+/* .Btn:hover .sign {
+	width: 30%;
+	transition-duration: .3s;
+	padding-left: 12px;
+} */
+
+/* Hover ဖြစ်ချိန် စာသား လင်းပွင့်လာမည့် Effect */
+/* .Btn:hover .text {
+	opacity: 1;
+	width: 70%;
+	transition-duration: .3s;
+	padding-right: 15px;
+	margin-top: -2px; စာသား ဗဟိုတည့်တည့်ကျစေရန်
+} */
+
+/* ခလုတ်နှိပ်လိုက်ချိန် တုံ့ပြန်မှု (Click Effect) */
+/* .Btn:active {
+	transform: translate(2px, 2px);
+	box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+} */
+
+/* SVG Icon ကို CSS ကနေ လှမ်းထည့်ခြင်း */
+.logout-icon {
+	width: 16px;
+	height: 16px;
+	background-image:
+		url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'><path fill='%23f3f4f6' d='M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z'/></svg>");
+	background-repeat: no-repeat;
+	background-position: center;
+}

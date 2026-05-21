@@ -1,0 +1,193 @@
+/* ၁။ Page တစ်ခုလုံး၏ နောက်ခံကို Dashboard အပြာရင့်ရောင်သို့ ပြောင်းလဲခြင်း */
+body {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	margin: 0;
+	background-color: #0d1117; /* DevHub ရဲ့ Main Background အရောင် */
+	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Logo Styling */
+.brand-logo {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	font-family: 'Inter', sans-serif;
+	font-size: 28px;
+	font-weight: bold;
+	color: #ffffff; /* သင့် CSS အလိုက် အရောင်ပြောင်းနိုင်သည် */
+	margin-bottom: 25px;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+.brand-logo i {
+	color: #3b82f6; /* Dashboard ကလို မိုးကြိုးအပြာရောင် */
+}
+
+/* ၂။ Login Card Box ကို ပိုမိုလန်းပြီး Glow ဖြစ်အောင် ပြင်ဆင်ခြင်း */
+.container {
+	border: solid 1px rgba(255, 255, 255, 0.1);
+	/* မသိမသာ လှပသော ဘောင်လိုင်း */
+	padding: 35px 40px;
+	border-radius: 16px;
+	background-color: #1f2937; /* Dashboard ကတ်များ၏ နောက်ခံအရောင် */
+	/* နူးညံ့ပြီး နက်ရှိုင်းသော Dark Shadow နှင့် အပြာရောင် Glow အနည်းငယ် */
+	box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 0 15px
+		rgba(0, 110, 255, 0.05);
+}
+
+/* ၃။ DevHub ခေါင်းစဉ်ပိုင်း */
+.container .heading {
+	font-size: 1.6rem;
+	margin-bottom: 30px;
+	font-weight: 700;
+	text-align: center;
+	color: #ffffff; /* စာသားကို အဖြူရောင်ပြောင်း */
+	letter-spacing: 1px;
+}
+
+.form {
+	width: 320px;
+	display: flex;
+	flex-direction: column;
+	gap: 22px;
+}
+
+/* ၄။ Input Field များ (Dashboard ကဲ့သို့ မှောင်ပြီး Glow ဖြစ်စေရန်) */
+.input-field {
+	position: relative;
+}
+
+.input-field input {
+	padding: 14px 15px;
+	font-size: 1rem;
+	border-radius: 8px;
+	border: solid 1px #4b5563; /* မှောင်သော ဘောင်အရောင် */
+	background-color: #111827; /* Input အတွင်းပိုင်းကို အမဲရောင်ပြောင်း */
+	color: #ffffff; /* ရိုက်မည့်စာသား အဖြူရောင် */
+	width: 100%;
+	box-sizing: border-box;
+	transition: all 0.3s ease;
+	outline: none;
+}
+
+/* Input ကိုနှိပ်လိုက်ချိန် (Focus) တွင် လန်းဆန်းသော အပြာရောင် Glow ပေါ်လာစေရန် */
+.input-field input:focus {
+	border-color: #006eff;
+	box-shadow: 0 0 10px rgba(0, 110, 255, 0.4);
+}
+
+/* ၅။ Floating Label စနစ်ကို Dark Mode နှင့် ကိုက်ညီအောင် ညှိခြင်း */
+.input-field label {
+	position: absolute;
+	color: #9ca3af; /* မီးခိုးရောင်ဖျော့ */
+	pointer-events: none;
+	left: 15px;
+	top: 14px;
+	transition: all 0.3s ease;
+}
+
+/* စာရိုက်နေချိန် သို့မဟုတ် Focus ဖြစ်ချိန်တွင် Label လေး အပေါ်တက်သွားသည့် Style */
+.input-field input:focus ~ label, .input-field input:valid ~ label {
+	transform: translateY(-24px) translateX(-10px) scale(0.8);
+	background-color: #1f2937;
+	/* Card background အရောင်နှင့် တစ်ထပ်တည်းဖြစ်စေရန် */
+	padding: 0px 6px;
+	color: #006eff; /* အပြာရောင် လင်းလင်းလေး ပြောင်းမည် */
+	font-weight: 600;
+}
+
+/* ၆။ Login ခလုတ်ကို Dashboard ရဲ့ Add Snippet ကဲ့သို့ ပြောင်းလဲခြင်း */
+.form .btn-container {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 18px; /* ခလုတ်နဲ့ စာတန်းကြားကို အကွာအဝေးလှလှလေး ခြားပေးသည် */
+	margin-top: 10px;
+}
+
+/* "Already have an account?" စာသားအတွက် Dark Mode အရောင် */
+.form .btn-container .acc-text {
+	color: #9ca3af; /* ဖတ်ရသက်သာသော မီးခိုးရောင်ဖျော့ */
+	font-size: 0.95rem;
+	letter-spacing: 0.3px;
+}
+
+/* "Login" Link လေးကို လင်းလင်းပွင့်ပွင့် အပြာရောင် ပြောင်းခြင်း */
+.form .btn-container .acc-text a {
+	color: #006eff; /* DevHub ရဲ့ Main Blue Color နှင့် ညှိလိုက်ခြင်း */
+	font-weight: 600;
+	text-decoration: none;
+	margin-left: 6px; /* စာသားနှစ်ခု ကပ်မနေစေရန် ဘေးချင်းခွာပေးခြင်း */
+	transition: color 0.2s ease;
+}
+
+/* Link ပေါ် Mouse တင်လိုက်ချိန်တွင် ဖြစ်မည့် Effect */
+.form .btn-container .acc-text a:hover {
+	color: #3b82f6; /* ပိုလင်းသော အပြာရောင် */
+	text-decoration: underline; /* မျဉ်းတားပေးခြင်း */
+}
+
+.form .btn {
+	width: 100%;
+	padding: 13px;
+	font-size: 1rem;
+	text-transform: uppercase;
+	letter-spacing: 1.5px;
+	border-radius: 8px;
+	border: none;
+	background: #006eff; /* DevHub Main Blue Color */
+	color: #fff;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.2s ease;
+	box-shadow: 0 4px 12px rgba(0, 110, 255, 0.3);
+}
+
+.form .btn:hover {
+	background: #0056c7;
+	transform: translateY(-1px); /* အနည်းငယ် ကြွတက်လာသော Effect */
+	box-shadow: 0 6px 15px rgba(0, 110, 255, 0.4);
+}
+
+.form .btn:active {
+	transform: translateY(1px);
+}
+
+/* ၇။ အောက်ခြေရှိ Create Account Link နေရာ */
+.form .btn-container a, .form .btn-container span {
+	color: #9ca3af;
+	font-size: 0.9rem;
+	text-decoration: none;
+	transition: color 0.2s;
+}
+
+.form .btn-container a {
+	color: #006eff; /* Link ကို အပြာရောင်ပြောင်း */
+	font-weight: 600;
+	margin-left: 5px;
+}
+
+.form .btn-container a:hover {
+	text-decoration: underline;
+	color: #3b82f6;
+}
+
+/* ၈။ Error Message Box (Dark Mode နှင့် ကိုက်ညီသော အနီရောင်ဖျော့) */
+.error-text {
+	color: #fca5a5;
+	background-color: #7f1d1d;
+	border: 1px solid #b91c1c;
+	padding: 12px;
+	border-radius: 6px;
+	text-align: center;
+	font-size: 0.9rem;
+	margin-bottom: 20px;
+	box-sizing: border-box;
+	width: 100%;
+}
